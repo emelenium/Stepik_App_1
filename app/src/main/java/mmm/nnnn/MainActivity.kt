@@ -22,16 +22,7 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(this, SecondActivity::class.java)
             i.putExtra("tag1", vText.text)
             startActivityForResult(i, 0)
-            val t = object : Thread() {
-                override fun run() {
-                    //TODO обращение в сеть
-                    this@MainActivity.runOnUiThread {
 
-                    }
-                }
-            }
-            t.start()
-            AT(this).execute()
         }
         Log.v("tag", "Был запущен OnCreate")
     }
@@ -63,15 +54,5 @@ class MainActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-    }
-}
-class AT(val act:MainActivity):AsyncTask<String,Int,String>(){
-    override fun doInBackground(vararg params: String?): String {
-        TODO("Not yet implemented")
-        return ""
-    }
-
-    override fun onPostExecute(result: String?) {
-        super.onPostExecute(result)
     }
 }
