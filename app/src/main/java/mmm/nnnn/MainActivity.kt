@@ -9,21 +9,29 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
+    lateinit var vText:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val vText=findViewById<TextView>(R.id.act1_text)
+        vText = findViewById<TextView>(R.id.act1_text)
         vText.setTextColor(0xFFFF0000.toInt())
         vText.setOnClickListener {
-            Log.e("tag","Был клик по надписи")
-            val i=Intent(this,SecondActivity::class.java)
-            startActivity(i)
+            Log.e("tag", "Был клик по надписи")
+            val i = Intent(this, SecondActivity::class.java)
+            i.putExtra("tag1", vText.text)
+            startActivityForResult(i, 0)
         }
-        Log.v("tag","Был запущен OnCreate")
-
+        Log.v("tag", "Был запущен OnCreate")
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+    if (data!=null){
+        val str=data.getStringExtra("tag2")
+        vText.text=str
+    }
+
+    }
     override fun onStart() {
         super.onStart()
     }
