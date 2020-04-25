@@ -9,7 +9,7 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-    lateinit var vText:TextView
+    lateinit var vText: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -20,18 +20,24 @@ class MainActivity : AppCompatActivity() {
             val i = Intent(this, SecondActivity::class.java)
             i.putExtra("tag1", vText.text)
             startActivityForResult(i, 0)
+            val t = object : Thread() {
+                override fun run() {
+                    //TODO обращение в сеть
+                }
+            }
         }
         Log.v("tag", "Был запущен OnCreate")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-    if (data!=null){
-        val str=data.getStringExtra("tag2")
-        vText.text=str
-    }
+        if (data != null) {
+            val str = data.getStringExtra("tag2")
+            vText.text = str
+        }
 
     }
+
     override fun onStart() {
         super.onStart()
     }
